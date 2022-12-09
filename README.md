@@ -1,16 +1,57 @@
-# todolist
+# TODO List App
+투두 리스트 앱 만들기!  
+Todoist처럼 만들자
 
-A new Flutter project.
+## 1. 목표
+### 필수 기능
+- 프로젝트, 작업 종류, 작업이 있어야한다.
+<!-- - 프로젝트에는 아래의 정보가 있어야한다.
+    - 아이디
+    - 이름
+    - 테마
+    - 보기 형식
+    - 생성 일자
+- 작업 종류(섹션)에는 아래의 정보가 있어야한다.
+    - 아이디
+    - 프로젝트 아이디
+    - 제목
+    - 생성 일자
+- 작업에는 아래의 정보가 있어야한다
+    - 아이디 - 작업 고유 식별자
+    - 섹션 아이디 - 작업의 종류 아이디 - 섹션의 아이디
+    - 그룹 아이디 - 작업의 그룹 아이디 - 최상위 작업의 아이디
+    - 계층 - 그룹 내에서 순서 최상위 작업은 1개만 존재한다.
+    - 작업 제목 - 텍스트 형식의 제목 255자 이내로
+    - 작업 내용 - 텍스트 형식의 내용 추후 변경 될수있다
+    - 생성 일자 - UnixTime 단위 초
+    - 변경 일자 - UnixTime 단위 초
+    - 마감 날짜 - UnixTime 단위 초
+    - 우선 순위 - 지금 단계에서는 1,2,3,4 숫자 커스텀(제한이 잇어도 1을 남발하게 사용하는것은 사용자의 문제다)
+    - 라벨 - 태그 처럼 즐겨찾기 용도
+    - 작업 상태 
+        - 완료
+        - 미완료
+        - 작업 미완료 (작업이 활성화 되어있다의 의미로 1이상...)
+            - 여유 1
+            - 촉박 2
+            - 기한 지남 3
+        - 작업 완료 0 -->
+- 작업 생성/편집/삭제
+- 작업을 기기에 저장
+- 작업의 상태분류(여유/촉박/마감/기한 지남)와 표시
+- 작업 종류를 구분하여 분류
+    - 작업 종류 위치로 이동하는 네비게이션 바 기능
+- 작업 마감 알람 기능
+    - 마감 알람
+    - 촉박 알람
+    - 사용자 지정 알람
+- 하위 작업 기능
 
-## Getting Started
+  
+### 있으면 좋은 기능
+- 즐겨찾기
+- 서버/로컬 저장
+- 작업 내 댓글 기능
+- 작업 진행도 그래프 기능
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## [세부계획 및 설계](./everyone_has_a_plan/README.md)
