@@ -22,23 +22,45 @@ class _TodoTileState extends State<TodoTile> {
         children: [
           Stack(
             children: [
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    isSelected = !isSelected;
-                  });
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(24),
-                  decoration: BoxDecoration(
-                    color: Colors.yellow,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
+              // AnimatedContainer(
+              //   duration: const Duration(milliseconds: 100),
+              //   height: isSelected ? 300 : 0,
+              //   padding: const EdgeInsets.all(24),
+              //   decoration: BoxDecoration(
+              //       color: Colors.blue[300],
+              //       borderRadius: BorderRadius.only(
+              //           bottomLeft: Radius.circular(12),
+              //           bottomRight: Radius.circular(12))),
+              //   child: isSelected
+              //       ? Row(
+              //           children: [
+              //             Text(widget.task.content ?? "",
+              //                 style: TextStyle(
+              //                     decoration: widget.task.isCompleted
+              //                         ? TextDecoration.lineThrough
+              //                         : null)),
+              //           ],
+              //         )
+              //       : null,
+              // ),
+              Container(
+                padding: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                  color: Colors.yellow,
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      isSelected = !isSelected;
+                    });
+                  },
                   child: Row(
                     children: [
                       Checkbox(
-                          value: widget.task.isCompleted,
-                          onChanged: widget.onPressed),
+                        value: widget.task.isCompleted,
+                        onChanged: widget.onPressed,
+                      ),
                       Text(widget.task.title,
                           style: TextStyle(
                               decoration: widget.task.isCompleted
@@ -55,10 +77,8 @@ class _TodoTileState extends State<TodoTile> {
             height: isSelected ? 300 : 0,
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
-                color: Colors.blue[300],
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(12),
-                    bottomRight: Radius.circular(12))),
+                color: Colors.yellow[300],
+                borderRadius: BorderRadius.circular(24)),
             child: isSelected
                 ? Row(
                     children: [
@@ -70,7 +90,7 @@ class _TodoTileState extends State<TodoTile> {
                     ],
                   )
                 : null,
-          )
+          ),
         ],
       ),
     );

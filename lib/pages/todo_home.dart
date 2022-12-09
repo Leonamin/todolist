@@ -22,8 +22,9 @@ class _TodoHomeState extends State<TodoHome> {
             //WHY 이거 ValueKey<int>(tasks[index].id)를 사용하면 A dismissed Dismissible widget is still part of the tree 에러 발생
             // key: ValueKey<int>(tasks[index].id),
             key: UniqueKey(),
+            direction: DismissDirection.startToEnd,
             onDismissed: (direction) {
-              if (direction == DismissDirection.endToStart) {
+              if (direction == DismissDirection.startToEnd) {
                 setState(() {
                   tasks.removeAt(index);
                 });
