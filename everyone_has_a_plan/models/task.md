@@ -8,8 +8,8 @@ TodoTask
 - [content](#5-content)
 - [createdAt](#6-createdat)
 - [modifiedAt](#7-modifiedat)
-- [isCompleted](#8-iscompleted)
-- [deadline](#9-deadline)
+- [deadline](#8-deadline)
+- [isCompleted](#9-iscompleted)
 - [priority](#10-priority)
 - [alarmList](#11-alarmlist)
 - [taskGroupId](#12-taskgroupid)
@@ -30,10 +30,10 @@ TodoTask
 `int64` 작업이 생성된 날짜
 ## 7. modifiedAt
 `int64` 작업이 수정된 날짜 작업 속성이 바뀌면 바뀐다.
-## 8. isCompleted
-`bool` 작업이 완료되었는지 구분 true 완료 false 미완료
-## 9. deadline
+## 8. deadline
 `int64` 작업이 마감되는 날짜
+## 9. isCompleted
+`bool` 작업이 완료되었는지 구분 true 완료 false 미완료
 ## 10. priority
 `int` 작업의 우선순위 그냥 1,2,3,4로 할 예정
 ## 11. alarmList
