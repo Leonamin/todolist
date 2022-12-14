@@ -15,6 +15,7 @@ class TodoTaskCard extends StatefulWidget {
 
 class _TodoTaskCardState extends State<TodoTaskCard> {
   bool testIsCompleted = false;
+  bool isHover = false;
 
   @override
   Widget build(BuildContext context) {
@@ -30,84 +31,98 @@ class _TodoTaskCardState extends State<TodoTaskCard> {
           color: Constants.prioriy4Color,
         ),
       ),
-      // elevation: taskProvier.isHover ? 1.0 : 0.5,
+      elevation: isHover ? 1.0 : 0.5,
       child: InkWell(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Checkbox(
-              value: testIsCompleted,
-              shape: CircleBorder(
-                  side: BorderSide(
-                width: 1.0,
-                //TODO 우선순위 구분
-                color: Constants.prioriy4Color,
-              )),
-              // onChanged: onPressed
-              onChanged: (value) {
-                setState(() {
-                  testIsCompleted = !testIsCompleted;
-                });
-              },
-              // TODO 우선순위 구분
-              activeColor: Constants.prioriy4Color,
-            ),
-            const SizedBox(
-              width: 4,
-            ),
-            // 작업 내용
-            Flexible(
-              child: Stack(
-                children: [
-                  Visibility(
-                    // TODO 호버링 속성
-                    // visible: provider.isHover ? true : false,
-                    visible: true,
-                    child: Positioned(
-                      top: 4,
-                      right: 4,
-                      child: InkWell(
-                        onTap: () {},
-                        child: Icon(
-                          Icons.more_horiz_outlined,
-                          color: Colors.black.withOpacity(0.5),
+        // https://stackoverflow.com/questions/67994569/flutter-inkwell-why-does-onhover-require-ontap
+        // onHover은 단독으로 동작하지 않는다 onTap이 있어야함
+        onHover: (value) {
+          setState(() {
+            isHover = value;
+          });
+        },
+        onTap: () {
+          //showDetailTodoTask()
+        },
+        hoverColor: Colors.transparent,
+        splashColor: Colors.yellow,
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Checkbox(
+                value: testIsCompleted,
+                shape: CircleBorder(
+                    side: BorderSide(
+                  width: 1.0,
+                  //TODO 우선순위 구분
+                  color: Constants.prioriy4Color,
+                )),
+                // onChanged: onPressed
+                onChanged: (value) {
+                  setState(() {
+                    testIsCompleted = !testIsCompleted;
+                  });
+                },
+                // TODO 우선순위 구분
+                activeColor: Constants.prioriy4Color,
+              ),
+              const SizedBox(
+                width: 4,
+              ),
+              Flexible(
+                child: Stack(
+                  children: [
+                    // 설정
+                    Visibility(
+                      visible: isHover ? true : false,
+                      child: Positioned(
+                        top: 4,
+                        right: 4,
+                        child: InkWell(
+                          onTap: () {},
+                          child: Icon(
+                            Icons.more_horiz_outlined,
+                            color: Colors.black.withOpacity(0.5),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Row(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            widget.task.title,
-                            style: TextStyle(
-                              color: !testIsCompleted
-                                  ? Colors.black
-                                  : Colors.black.withOpacity(0.5),
-                              fontSize: 16,
-                              decoration: !testIsCompleted
-                                  ? null
-                                  : TextDecoration.lineThrough,
+                    // 작업 부분
+                    Row(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.task.title,
+                              style: TextStyle(
+                                color: !testIsCompleted
+                                    ? Colors.black
+                                    : Colors.black.withOpacity(0.5),
+                                fontSize: 16,
+                                decoration: !testIsCompleted
+                                    ? null
+                                    : TextDecoration.lineThrough,
+                              ),
                             ),
-                          ),
-                          Text(
-                            widget.task.content,
-                            style: TextStyle(
-                                fontSize: 14,
-                                overflow: TextOverflow.ellipsis,
-                                color: Colors.black.withOpacity(0.5)),
-                            maxLines: 1,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
+                            Text(
+                              widget.task.content,
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  overflow: TextOverflow.ellipsis,
+                                  color: Colors.black.withOpacity(0.5)),
+                              maxLines: 1,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
