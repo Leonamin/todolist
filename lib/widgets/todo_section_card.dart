@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/models/todo_task.dart';
+import 'package:todolist/widgets/add_todo_task_card.dart';
 import 'package:todolist/widgets/todo_task_card.dart';
 
 class TodoSectionCard extends StatefulWidget {
@@ -34,6 +35,7 @@ class _TodoSectionCardState extends State<TodoSectionCard> {
         TodoTaskCard(
           task: taskList.first,
         ),
+        AddTodoTaskCard(),
       ],
     );
   }
