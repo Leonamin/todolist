@@ -1,4 +1,4 @@
-class Task {
+class TodoTask {
   int id;
   int projectId;
   int sectionId;
@@ -14,7 +14,7 @@ class Task {
   int taskGroupClass;
   int taskOrder;
 
-  Task({
+  TodoTask({
     required this.id,
     required this.projectId,
     required this.sectionId,
