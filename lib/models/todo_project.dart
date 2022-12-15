@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class TodoProject {
   int id;
   String name;
-  Colors theme;
+  int theme;
   ProjectViewType viewType;
   int createdAt;
   int modifiedAt;
