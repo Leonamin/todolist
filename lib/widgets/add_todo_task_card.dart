@@ -189,6 +189,9 @@ class _AddTodoTaskCardState extends State<AddTodoTaskCard> {
                     ),
                   ],
                 ),
+                const SizedBox(
+                  height: 4.0,
+                ),
                 // 기타 아이콘 버튼 행
                 Row(
                   children: [
@@ -235,6 +238,9 @@ class _AddTodoTaskCardState extends State<AddTodoTaskCard> {
                       ),
                     ),
                   ],
+                ),
+                const SizedBox(
+                  height: 4.0,
                 ),
               ],
             ),
