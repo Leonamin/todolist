@@ -30,13 +30,16 @@ class _TodoSectionCardState extends State<TodoSectionCard> {
           taskOrder: index));
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        TodoTaskCard(
-          task: taskList.first,
-        ),
-        AddTodoTaskCard(),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListView(
+        children: [
+          TodoTaskCard(
+            task: taskList.first,
+          ),
+          AddTodoTaskCard(),
+        ],
+      ),
     );
   }
 }
