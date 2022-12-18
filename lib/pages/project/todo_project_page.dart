@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todolist/pages/project/todo_project_screen.dart';
 import 'package:todolist/pages/project/providers/todo_project_provider.dart';
+import 'package:todolist/widgets/todo_project_create_dialog.dart';
 
 class TodoProjectPage extends StatefulWidget {
   const TodoProjectPage({super.key});
@@ -20,6 +21,13 @@ class _TodoProjectPageState extends State<TodoProjectPage>
       fontWeight: FontWeight.bold,
       color: Colors.black.withOpacity(0.5));
   final normalTextStyle = TextStyle(fontSize: 18, color: Colors.black);
+
+  _showDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => TodoProjectCreateDialog(),
+    );
+  }
 
   _appBar(provider) {
     return AppBar();
@@ -41,7 +49,7 @@ class _TodoProjectPageState extends State<TodoProjectPage>
               children: [
                 InkWell(
                     onTap: () {
-                      // showProjectCreateDialog
+                      _showDialog();
                     },
                     child: const Icon(Icons.add)),
                 _showProjectList
