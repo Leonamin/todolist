@@ -3,7 +3,8 @@ import 'package:todolist/models/todo_project.dart';
 
 class TodoProjectProvider extends ChangeNotifier {
   // UseCase _todoProjectPageUseCase
-  List<TodoProjectProvider> todoProjectList = [];
+  // DB의 모델 그대로 가져오는건 별로 좋은 선택이 아닌거 같다.
+  List<TodoProject> todoProjectList = [];
 
   Future<void> laodProjectList() async {
     // 데이터 가져오기
@@ -40,11 +41,13 @@ class TodoProjectProvider extends ChangeNotifier {
           projectClass: 1,
           projectOrder: 1),
     ];
+    todoProjectList.addAll(temp);
   }
 
   //TODO 추후 원격 서버랑 동기화할 함수임
   Future<void> syncProjectList() async {}
-  Future<void> addProject() async {}
+  // TODO 프로젝트 생성 전용 스키마 만들어여함
+  Future<void> addProject(TodoProject newProject) async {}
   Future<void> deleteProject(int projectId) async {}
   Future<void> modifyProject(int projectId, TodoProject newProject) async {}
   Future<void> getProject(int projectId) async {}
