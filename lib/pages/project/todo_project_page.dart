@@ -13,16 +13,7 @@ class TodoProjectPage extends StatefulWidget {
 class _TodoProjectPageState extends State<TodoProjectPage>
     with TickerProviderStateMixin {
   // TODO 사용자 설정
-  bool showProjectList = true;
-
-  late final AnimationController _controller = AnimationController(
-    duration: const Duration(seconds: 2),
-    vsync: this,
-  )..repeat(reverse: true);
-  late final Animation<double> _animation = CurvedAnimation(
-    parent: _controller,
-    curve: Curves.easeIn,
-  );
+  bool _showProjectList = false;
 
   final headerTextStyle = TextStyle(
       fontSize: 18,
@@ -30,16 +21,15 @@ class _TodoProjectPageState extends State<TodoProjectPage>
       color: Colors.black.withOpacity(0.5));
   final normalTextStyle = TextStyle(fontSize: 18, color: Colors.black);
 
-  _appBar() {
+  _appBar(provider) {
     return AppBar();
   }
 
-  _drawer() {
+  _drawer(TodoProjectProvider provider) {
     return Drawer(
       child: ListView(
         children: [
-          ListTile(
-            onTap: () {},
+          ExpansionTile(
             // hoverColor: Colors.black.withOpacity(0.2),
             // FIXME 하드코딩 글자
             title: Text(
@@ -49,29 +39,30 @@ class _TodoProjectPageState extends State<TodoProjectPage>
             trailing: Wrap(
               spacing: 8.0,
               children: [
-                InkWell(onTap: () {}, child: Icon(Icons.add)),
                 InkWell(
                     onTap: () {
-                      setState(() {
-                        showProjectList = !showProjectList;
-                      });
+                      // showProjectCreateDialog
                     },
-                    child: showProjectList
-                        ? Icon(Icons.arrow_drop_down)
-                        : Icon(Icons.arrow_left)),
+                    child: const Icon(Icons.add)),
+                _showProjectList
+                    ? const Icon(Icons.arrow_drop_down)
+                    : const Icon(Icons.arrow_left),
               ],
             ),
+            children: List<Widget>.generate(
+              provider.todoProjectList.length,
+              (index) => ListTile(
+                onTap: () {
+                  // TODO 현재 프로젝트 설정
+                  // provider.setCurrentProject()
+                },
+                title: Text(provider.todoProjectList[index].name),
+              ),
+            ),
+            onExpansionChanged: (bool expanded) {
+              setState(() => _showProjectList = expanded);
+            },
           ),
-          AnimatedSize(
-            duration: Duration(milliseconds: 150),
-            curve: Curves.fastOutSlowIn,
-            child: Container(
-                child: !showProjectList
-                    ? null
-                    : ListTile(
-                        title: Text("ASDASD"),
-                      )),
-          )
         ],
       ),
     );
@@ -91,10 +82,13 @@ class _TodoProjectPageState extends State<TodoProjectPage>
         provider.laodProjectList();
         return provider;
       },
-      builder: (context, child) => Scaffold(
-        appBar: _appBar(),
-        drawer: _drawer(),
-        body: TodoProjectScreen(),
+      builder: (context, child) => Consumer<TodoProjectProvider>(
+        builder: (context, provider, child) => Scaffold(
+          appBar: _appBar(provider),
+          drawer: _drawer(provider),
+          // TODO 중첩 네비게이터
+          body: TodoProjectScreen(),
+        ),
       ),
     );
   }
