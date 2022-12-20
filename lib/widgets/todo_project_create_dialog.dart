@@ -47,6 +47,23 @@ class _TodoProjectCreateDialogState extends State<TodoProjectCreateDialog> {
 
   String dropdownValue = themeList.first.name;
 
+  Widget _dropdownItemWidget(ThemeData theme) {
+    return Row(
+      children: [
+        Container(
+          width: 10,
+          height: 10,
+          decoration: BoxDecoration(
+              color: Color(theme.value), shape: BoxShape.rectangle),
+        ),
+        const SizedBox(
+          width: 8,
+        ),
+        Text(theme.name),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -95,30 +112,41 @@ class _TodoProjectCreateDialogState extends State<TodoProjectCreateDialog> {
                       fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
+                // 테마 선택
                 Row(
                   children: [
                     Expanded(
-                      child: DropdownButton(
-                        value: dropdownValue,
-                        icon: Icon(null),
-                        elevation: 16,
-                        style: TextStyle(color: Colors.black),
-                        underline: Container(),
-                        onChanged: (String? value) {
-                          setState(() {
-                            dropdownValue = value!;
-                          });
-                        },
-                        borderRadius:
-                            BorderRadius.circular(_defaultBorderRadius),
-                        items: themeList
-                            .map<DropdownMenuItem<String>>((ThemeData value) {
-                          return DropdownMenuItem<String>(
-                            value: value.name,
-                            child: Text(value.name),
-                          );
-                        }).toList(),
-                        isExpanded: true,
+                      // https://github.com/flutter/flutter/pull/14849
+                      // 이거 해줘야 정렬된다.
+                      child: ButtonTheme(
+                        alignedDropdown: true,
+                        child: DropdownButton(
+                          value: dropdownValue,
+                          icon: Icon(null),
+                          elevation: 16,
+                          style: TextStyle(color: Colors.black),
+                          underline: Container(),
+                          onChanged: (String? value) {
+                            setState(() {
+                              dropdownValue = value!;
+                            });
+                          },
+                          borderRadius:
+                              BorderRadius.circular(_defaultBorderRadius),
+                          items: themeList
+                              .map<DropdownMenuItem<String>>((ThemeData theme) {
+                            return DropdownMenuItem<String>(
+                              value: theme.name,
+                              child: _dropdownItemWidget(theme),
+                            );
+                          }).toList(),
+                          isExpanded: true,
+                          selectedItemBuilder: (context) {
+                            return themeList
+                                .map((theme) => _dropdownItemWidget(theme))
+                                .toList();
+                          },
+                        ),
                       ),
                     ),
                   ],
